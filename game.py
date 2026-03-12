@@ -1,24 +1,32 @@
+import tkinter as tk
 import random
 
-play = "yes"
+number = random.randint(1, 10)
 
-while play == "yes":
+def check_guess():
+    guess = int(entry.get())
 
-    number = random.randint(1, 10)
-    guess = None
-    attempts = 0
+    if guess < number:
+        result.config(text="Too Low!")
+    elif guess > number:
+        result.config(text="Too High!")
+    else:
+        result.config(text="Correct!")
 
-    print("\nGuess the Number Game")
+root = tk.Tk()
+root.title("Guess The Number")
 
-    while guess != number:
-        guess = int(input("Enter a number between 1 and 10: "))
-        attempts += 1
+label = tk.Label(root, text="Guess number 1-10")
+label.pack()
 
-        if guess < number:
-            print("Too low!")
-        elif guess > number:
-            print("Too high!")
-        else:
-            print("Correct! You win in", attempts, "attempts!")
+entry = tk.Entry(root)
+entry.pack()
 
-    play = input("Play again? (yes/no): ")
+button = tk.Button(root, text="Guess", command=check_guess)
+button.pack()
+
+result = tk.Label(root, text="")
+result.pack()
+
+root.mainloop()
+
